@@ -1,0 +1,47 @@
+# OS file
+.DS_Store
+# idea files
+*.iws
+*.out
+*.iml.*
+*.ipr
+*.log
+.idea
+.idea/*
+workspace.xml
+test1.migration
+*.*journal
+WebUserProvider.iml
+*rx_*.xml
+*rx_*.java
+*.iml
+*RX_*
+chromedriver*.*
+chromedriver*
+chromedriver-mac-64bit*.*
+/BillingTests/download/*.*
+
+# Eclipse
+.classpath
+.settings
+.project
+
+# Can also ignore all directories and files in a directory.
+target
+test-output
+screenshot
+XMLreport
+.idea
+*~
+WebUserProvider/WebUserProvider.iml
+velocity.log
+automation.iml
+BillingTests/testng/debug
+*debug*.*
+*javadocs*
+testrail*.tmp
+bakup_suite*.xml
+qaauto-runner/backup_suite*.xml
+qaauto-tests/backup_suite*.xml
+appdirect_*.sql
+billing_*.sql
