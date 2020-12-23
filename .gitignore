@@ -33,15 +33,5 @@ screenshot
 XMLreport
 .idea
 *~
-WebUserProvider/WebUserProvider.iml
-velocity.log
-automation.iml
-BillingTests/testng/debug
 *debug*.*
 *javadocs*
-testrail*.tmp
-bakup_suite*.xml
-qaauto-runner/backup_suite*.xml
-qaauto-tests/backup_suite*.xml
-appdirect_*.sql
-billing_*.sql
