@@ -2,34 +2,28 @@ package stepDefinitions;
 
 import org.junit.Assert;
 
+import apiEngine.Endpoints;
 import apiEngine.model.requests.ValidateRequest;
+import apiEngine.model.responses.ValidateResponse;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
-import io.restassured.RestAssured;
-import io.restassured.path.json.JsonPath;
 import io.restassured.response.Response;
-import io.restassured.specification.RequestSpecification;
 
 public class Steps {
 
-	RequestSpecification request;
-	Response response;
+	private static Response response;
+	private static ValidateResponse validateResponse;
 
-	@Given("^Endpoint and payload for validation$")
+	@Given("^Endpoint and payload for trade validation$")
 	public void endpointAndPayload() {
-		String baseUrl = "http://localhost:12345";
 
-		RestAssured.baseURI = baseUrl;
-		request = RestAssured.given();
-
-		request.header("Accept", "*/*");
-		request.header("Content-Type", "application/json");
 	}
 
 	@When("^Endpoint is hit with correct payload$")
 	public void correctPayloadGiven() {
-		ValidateRequest validateRequest = new ValidateRequest("PLUTO1",
+		ValidateRequest validateRequest = new ValidateRequest(
+				"PLUTO1",
 				"EURUSD",
 				"Forward",
 				"SELL",
@@ -38,20 +32,16 @@ public class Steps {
 				1120000.00,
 				1.12,
 				"2017-08-22",
-				"CS  Zurich",
+				"CS Zurich",
 				"Johann Baumfiddler"
 				);
-		response = request.body(validateRequest).post("/validate");
+		response = Endpoints.postValidateTrade(validateRequest);
 	}
 
 	@Then("^Response recieved as 200 and success$")
 	public void successApiResult() {
+		validateResponse = response.getBody().as(ValidateResponse.class);
 		Assert.assertEquals(response.getStatusCode(), 200);
-
-		String jsonString = response.asString();
-		String valueDate = JsonPath.from(jsonString).get("status");
-		String tradeDate = JsonPath.from(jsonString).get("messages");
-		System.out.println(valueDate);
-		System.out.println(tradeDate);
+		Assert.assertEquals("Status is", validateResponse.getStatus(), "SUCCESS");
 	}
 }

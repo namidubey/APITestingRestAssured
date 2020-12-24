@@ -4,9 +4,14 @@ Feature: Validation of the trade information for FX Spot, Forward, Options of tr
   trade-validation-service Swagger URL : http://localhost:12345/swagger-ui.html
 
   Scenario: Successful response when correct payload is given
-    Given Endpoint and payload for validation
+    Given Endpoint and payload for trade validation
     When Endpoint is hit with correct payload
     Then Response recieved as 200 and success
+    When Value Date is before Trade Date
+    Then Error status with message occurs
+    When Value date is on weekend
+    Then Error status with message occurs
+
 
 #  Scenario: Value Date cannot be before trade date
 #    Given Endpoint and payload for validation
