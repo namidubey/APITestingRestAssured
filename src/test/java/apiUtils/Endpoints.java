@@ -6,6 +6,7 @@ import io.restassured.response.Response;
 import io.restassured.specification.RequestSpecification;
 
 public class Endpoints {
+
 	private static final String BASE_URL = "http://localhost:12345";
 
 	public static Response postValidateTrade(ValidateRequest validateRequest) {

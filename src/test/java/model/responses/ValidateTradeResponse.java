@@ -1,4 +1,4 @@
-package apiEngine.model.responses;
+package model.responses;
 
 import java.util.List;
 
