@@ -3,7 +3,7 @@ Feature: Validation of the trade information for FX Spot, Forward, Options of tr
   API - http://localhost:12345/validate
 
   Scenario: Successful response when correct payload is given
-    Given Validate Trade Post API
+   Given Validate Trade Post API
     When Post request is made
       | key      | value |
       | customer | PLUTO1 |
@@ -87,5 +87,5 @@ Feature: Validation of the trade information for FX Spot, Forward, Options of tr
       | amount2  | 1120000.00|
       | rate| 1.12 |
       |legalEntity| CS Zurich |
-  Then Failed due to valueDate is not as per the productType
+  Then Failed due to valueDate is not as per productType
 

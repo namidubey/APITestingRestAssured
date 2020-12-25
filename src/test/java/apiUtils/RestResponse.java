@@ -48,6 +48,12 @@ public class RestResponse<T> implements IRestResponse<T> {
 		return data;
 	}
 
+	public boolean isFailure() {
+		int code = response.getStatusCode();
+		if( code == 400 || code == 401 || code == 403 || code == 404 || code == 405 || code == 409 || code == 500 || code == 503) return true;
+		return false;
+	}
+
 	public Exception getException() {
 		return e;
 	}

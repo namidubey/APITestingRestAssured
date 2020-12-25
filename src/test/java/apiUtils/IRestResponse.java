@@ -11,6 +11,8 @@ public interface IRestResponse<T> {
 
 	public boolean isSuccessful();
 
+	public boolean isFailure();
+
 	public String getStatusDescription();
 
 	public Response getResponse();
