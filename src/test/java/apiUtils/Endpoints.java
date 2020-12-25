@@ -1,19 +1,24 @@
-package apiEngine;
+package apiUtils;
 
-import apiEngine.model.requests.ValidateRequest;
 import io.restassured.RestAssured;
 import io.restassured.response.Response;
 import io.restassured.specification.RequestSpecification;
+import model.requests.ValidateTradeRequest;
+import model.responses.ValidateTradeResponse;
 
 public class Endpoints {
 
-	private static final String BASE_URL = "http://localhost:12345";
+	private final RequestSpecification request;
 
-	public static Response postValidateTrade(ValidateRequest validateRequest) {
-		RestAssured.baseURI = BASE_URL;
-		RequestSpecification request = RestAssured.given();
+	public Endpoints(String baseUrl) {
+		RestAssured.baseURI = baseUrl;
+		request = RestAssured.given();
 		request.header("Accept", "*/*");
 		request.header("Content-Type", "application/json");
-		return request.body(validateRequest).post("/validate");
+	}
+
+	public IRestResponse<ValidateTradeResponse> postValidateTrade(ValidateTradeRequest validateTradeRequest) {
+		Response response =  request.body(validateTradeRequest).post(Route.getValidateTrade());
+		return new RestResponse(ValidateTradeResponse.class, response);
 	}
 }

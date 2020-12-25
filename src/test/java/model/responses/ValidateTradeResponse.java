@@ -2,7 +2,7 @@ package model.responses;
 
 import java.util.List;
 
-public class ValidateResponse {
+public class ValidateTradeResponse {
 	public String status;
 	public List<String> messages = null;
 
