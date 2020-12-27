@@ -1,6 +1,8 @@
 package step_definitions;
 
 import api.APIPost;
+import com.sun.javafx.tools.packager.Log;
+import logs.Logs;
 import utilities.ConfigFileReader;
 
 public class BaseStep {
@@ -12,6 +14,7 @@ public class BaseStep {
 	}
 
 	public static String getBaseUrl() {
+		Logs.getInstance().infoLog("Base URL is getting created");
 		return ConfigFileReader.getInstance().getHost()+":"+ConfigFileReader.getInstance().getPort();
 	}
 }

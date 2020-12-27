@@ -11,6 +11,7 @@ import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import io.restassured.response.Response;
+import logs.Logs;
 import testData.buildRequestPayload;
 
 public class ValidateTradeBatchSteps extends BaseStep {
@@ -73,8 +74,7 @@ public class ValidateTradeBatchSteps extends BaseStep {
 	}
 
 	public void requestStepForBatch(String filePath) {
-		APIPost api = new APIPost();
 		validateBatchRequest = buildRequestPayload.createBatchRequest(filePath);
-		validateBatchResponse = api.postValidateBatch(validateBatchRequest);
+		validateBatchResponse = new APIPost().postValidateBatch(validateBatchRequest);
 	}
 }

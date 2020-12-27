@@ -3,6 +3,7 @@ package api;
 import java.io.File;
 import java.util.List;
 
+import logs.Logs;
 import utilities.apiUtils.IRestResponse;
 import utilities.apiUtils.RestResponse;
 import io.restassured.RestAssured;
@@ -24,15 +25,18 @@ public class APIPost {
 
 	public IRestResponse<ValidateTradeResponse> postValidateTrade(ValidateTradeRequest validateTradeRequest) {
 		Response response =  request.body(validateTradeRequest).post("/validate");
+		Logs.getInstance().infoLog("Request is made for Validate Trade");
 		return new RestResponse(ValidateTradeResponse.class, response);
 	}
 
 	public IRestResponse<List<ValidateTradeResponse>> postValidateBatch(List<ValidateTradeRequest> validateTradeRequests) {
 		Response response = request.body(validateTradeRequests).post("/validateBatch");
+		Logs.getInstance().infoLog("Request is made for Validate Batch");
 		return new RestResponse(ValidateTradeResponse.class, response);
 	}
 
 	public Response postValidateBatch(File file) {
+		Logs.getInstance().infoLog("Request is made for Validate Batch via Json");
 		return request.body(file).post("/validateBatch");
 	}
 }

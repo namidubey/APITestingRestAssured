@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Map;
 
 import io.cucumber.datatable.DataTable;
+import logs.Logs;
 import model.requests.ValidateTradeRequest;
 
 public class buildRequestPayload {
@@ -13,6 +14,7 @@ public class buildRequestPayload {
 	public static ValidateTradeRequest createValidateTradeValidRequest(DataTable dataTable) {
 		//Write the code to handle Data Table
 		Map<String,String> data = dataTable.transpose().asMap(String.class, String.class);
+		Logs.getInstance().infoLog("Validate Trade payload is build");
 		return ValidateTradeRequest.builder()
 				.customer(data.get("customer"))
 				.trader(data.get("trader"))
@@ -31,6 +33,7 @@ public class buildRequestPayload {
 	public static ValidateTradeRequest createValidateTradeValidRequestForOptions(DataTable dataTable) {
 		//Write the code to handle Data Table
 		Map<String,String> data = dataTable.transpose().asMap(String.class, String.class);
+		Logs.getInstance().infoLog("Validate Trade for Options payload is build");
 		return ValidateTradeRequest.builder()
 				.customer(data.get("customer"))
 				.trader(data.get("trader"))
@@ -56,6 +59,7 @@ public class buildRequestPayload {
 
 	public static List<ValidateTradeRequest> createBatchRequest(List<DataTable> dataTables) {
 		List<ValidateTradeRequest> validateTradeRequests = new ArrayList<>();
+		Logs.getInstance().infoLog("Validate Batch payload is build");
 		for (DataTable dataTable: dataTables) {
 			validateTradeRequests.add(createValidateTradeValidRequest(dataTable));
 		}
@@ -63,7 +67,7 @@ public class buildRequestPayload {
 	}
 
 	public static File createBatchRequest(String filePath) {
-		File file = new File(filePath);
-		return file;
+		Logs.getInstance().infoLog("Validate Batch payload is serialized from Json file");
+		return new File(filePath);
 	}
 }

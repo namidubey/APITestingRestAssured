@@ -78,8 +78,7 @@ public class ValidateTradeSteps extends BaseStep{
 
 	@When("^I invoke validate trade request for options$")
 	public void validate_trade_request_for_options(DataTable dataTable) {
-		APIPost api = new APIPost();
 		validateTradeRequest = buildRequestPayload.createValidateTradeValidRequestForOptions(dataTable);
-		validateTradeResponse = api.postValidateTrade(validateTradeRequest);
+		validateTradeResponse = new APIPost().postValidateTrade(validateTradeRequest);
 	}
 }
