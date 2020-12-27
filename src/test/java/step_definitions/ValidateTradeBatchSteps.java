@@ -7,7 +7,6 @@ import org.json.JSONObject;
 import org.junit.Assert;
 
 import api.APIPost;
-import io.cucumber.datatable.DataTable;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
@@ -41,7 +40,7 @@ public class ValidateTradeBatchSteps extends BaseStep {
 
 	@When("^I invoke validate batch request with given payload$")
 	public void post_request_for_batch_is_made() {
-		requestStepForBatch("src/test/resources/json/validateBatch.json");
+		requestStepForBatch("src/test/resources/json/validateBatchWithOneInvalidSubarray.json");
 	}
 
 	@Then("^Failure response received for batch request$")
