@@ -2,14 +2,14 @@ package step_definitions;
 import org.junit.Assert;
 
 import api.APIPost;
-import apiUtils.IRestResponse;
+import utilities.apiUtils.IRestResponse;
 import io.cucumber.datatable.DataTable;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import model.requests.ValidateTradeRequest;
 import model.responses.ValidateTradeResponse;
-import testData.createRequestData;
+import testData.buildRequestPayload;
 
 public class ValidateTradeSteps extends BaseStep{
 
@@ -24,9 +24,9 @@ public class ValidateTradeSteps extends BaseStep{
 
 	@When("^I invoke validate trade request with given data$")
 	public void payloadGiven(DataTable payLoad) {
-		APIPost apiPost = new APIPost();
-		validateTradeRequest = createRequestData.createValidateTradeValidRequest(payLoad);
-		validateTradeResponse = apiPost.postValidateTrade(validateTradeRequest);
+		APIPost api = new APIPost();
+		validateTradeRequest = buildRequestPayload.createValidateTradeValidRequest(payLoad);
+		validateTradeResponse = api.postValidateTrade(validateTradeRequest);
 	}
 
 	@Then("^Success response received$")
@@ -74,5 +74,12 @@ public class ValidateTradeSteps extends BaseStep{
 
 	public void verifyErrorMessage(String expectedError) {
 		Assert.assertEquals("Expected error message is ", expectedError, validateTradeResponse.getBody().getMessages().get(0));
+	}
+
+	@When("^I invoke validate trade request for options$")
+	public void validate_trade_request_for_options(DataTable dataTable) {
+		APIPost api = new APIPost();
+		validateTradeRequest = buildRequestPayload.createValidateTradeValidRequestForOptions(dataTable);
+		validateTradeResponse = api.postValidateTrade(validateTradeRequest);
 	}
 }

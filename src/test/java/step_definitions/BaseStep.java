@@ -1,7 +1,7 @@
 package step_definitions;
 
 import api.APIPost;
-import utility.ConfigFileReader;
+import utilities.ConfigFileReader;
 
 public class BaseStep {
 	private APIPost endpoints;

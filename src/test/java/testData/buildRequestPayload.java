@@ -8,7 +8,7 @@ import java.util.Map;
 import io.cucumber.datatable.DataTable;
 import model.requests.ValidateTradeRequest;
 
-public class createRequestData {
+public class buildRequestPayload {
 
 	public static ValidateTradeRequest createValidateTradeValidRequest(DataTable dataTable) {
 		//Write the code to handle Data Table
@@ -25,6 +25,32 @@ public class createRequestData {
 				.amount2(Double.parseDouble(data.get("amount2")))
 				.rate(Double.parseDouble(data.get("rate")))
 				.legalEntity(data.get("legalEntity"))
+				.build();
+	}
+
+	public static ValidateTradeRequest createValidateTradeValidRequestForOptions(DataTable dataTable) {
+		//Write the code to handle Data Table
+		Map<String,String> data = dataTable.transpose().asMap(String.class, String.class);
+		return ValidateTradeRequest.builder()
+				.customer(data.get("customer"))
+				.trader(data.get("trader"))
+				.ccyPair(data.get("ccyPair"))
+				.type(data.get("type"))
+				.direction(data.get("direction"))
+				.tradeDate(data.get("tradeDate"))
+				.amount1(Double.parseDouble(data.get("amount1")))
+				.amount2(Double.parseDouble(data.get("amount2")))
+				.rate(Double.parseDouble(data.get("rate")))
+				.legalEntity(data.get("legalEntity"))
+				.deliveryDate(data.get("deliveryDate"))
+				.expiryDate(data.get("expiryDate"))
+				.payCcy(data.get("payCcy"))
+				.premium(data.get("premium"))
+				.premiumCcy(data.get("premiumCcy"))
+				.premiumDate(data.get("premiumDate"))
+				.premiumType(data.get("premiumType"))
+				.strategy(data.get("strategy"))
+				.style(data.get("style"))
 				.build();
 	}
 

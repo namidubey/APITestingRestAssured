@@ -44,3 +44,8 @@ Feature: Validation of the trade information for FX Spot, Forward, Options of tr
       | PLUTO1|Johann Baumfiddler|EURUSD|XYZ|SELL|2017-08-11|2017-08-22|1000000.00|1120000.00|1.12|CS Zurich|
   Then Failed due to valueDate is not as per productType
 
+  Scenario: Validate Trade request is successful when valid options payload is given
+    Given Validate Trade Post API
+    When I invoke validate trade request for options
+      | customer|trader|ccyPair|type|direction|tradeDate|amount1|amount2|rate|legalEntity|deliveryDate|expiryDate|payCcy|premium|premiumCcy|premiumType|premiumDate|strategy|style|
+      | PLUTO1|Johann Baumfiddler|EURUSD|Spot|SELL|2017-08-11|1000000.00|1120000.00|1.12|CS Zurich|2017-08-22|2017-08-21|USD|0.20|USD|%USD|2017-08-12 |CALL|EUROPEAN|

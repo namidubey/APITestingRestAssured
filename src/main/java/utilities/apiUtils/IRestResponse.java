@@ -1,4 +1,4 @@
-package apiUtils;
+package utilities.apiUtils;
 
 import io.restassured.response.Response;
 

@@ -7,11 +7,12 @@ import org.json.JSONObject;
 import org.junit.Assert;
 
 import api.APIPost;
+import io.cucumber.datatable.DataTable;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import io.restassured.response.Response;
-import testData.createRequestData;
+import testData.buildRequestPayload;
 
 public class ValidateTradeBatchSteps extends BaseStep {
 	private APIPost endpoints;
@@ -24,16 +25,27 @@ public class ValidateTradeBatchSteps extends BaseStep {
 		endpoints = getEndpoints();
 	}
 
-	@When("^I invoke validate batch request with given data$")
-	public void post_request_for_batch_is_made() {
-		APIPost apiPost = new APIPost();
-		validateBatchRequest = createRequestData.createBatchRequest("src/test/resources/json/validateBatch.json");
-		validateBatchResponse = apiPost.postValidateBatch(validateBatchRequest);
+	@When("^I invoke validate batch request with given valid payload$")
+	public void post_request_for_valid_batch_is_made() {
+		requestStepForBatch("src/test/resources/json/validateBatchWithBothValidJson.json");
 	}
 
-	@Then("^Success response received for batch$")
+	@Then("^Success response received for batch request$")
 	public void successApiResult() {
 		Assert.assertEquals(200, validateBatchResponse.statusCode());
+		assertStatus("Status of validateTrade response", "SUCCESS", 0, "status");
+		assertMessage("Message of validateTrade response", "null", 0, 0, "messages");
+		assertStatus("Status of validateTrade response", "SUCCESS", 1, "status");
+		assertMessage("Message of validateTrade response", "null", 0, 0, "messages");
+	}
+
+	@When("^I invoke validate batch request with given payload$")
+	public void post_request_for_batch_is_made() {
+		requestStepForBatch("src/test/resources/json/validateBatch.json");
+	}
+
+	@Then("^Failure response received for batch request$")
+	public void failureApiResult() {
 		assertStatus("Status of validateTrade response", "SUCCESS", 0, "status");
 		assertMessage("Message of validateTrade response", "null", 0, 0, "messages");
 		assertStatus("Status of invalid array", "ERROR", 1, "status");
@@ -59,5 +71,11 @@ public class ValidateTradeBatchSteps extends BaseStep {
 			String status = jObj.getJSONArray(key).getString(array2Index);
 			Assert.assertEquals(message, expectedValue, status);
 		}
+	}
+
+	public void requestStepForBatch(String filePath) {
+		APIPost api = new APIPost();
+		validateBatchRequest = buildRequestPayload.createBatchRequest(filePath);
+		validateBatchResponse = api.postValidateBatch(validateBatchRequest);
 	}
 }

@@ -16,5 +16,14 @@ public class ValidateTradeRequest {
 	private final String valueDate;
 	private final String legalEntity;
 	private final String trader;
+	private final String deliveryDate;
+	private final String expiryDate;
+	private final String payCcy;
+	private final String premium;
+	private final String premiumCcy;
+	private final String premiumDate;
+	private final String premiumType;
+	private final String strategy;
+	private final String style;
 }
 
