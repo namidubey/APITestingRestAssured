@@ -1,40 +1,35 @@
-package stepDefinitions;
-
+package step_definitions;
 import org.junit.Assert;
 
-import apiUtils.Endpoints;
+import api.APIPost;
 import apiUtils.IRestResponse;
 import io.cucumber.datatable.DataTable;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
-import listeners.TestContext;
 import model.requests.ValidateTradeRequest;
 import model.responses.ValidateTradeResponse;
-import testData.APItestData;
+import testData.createRequestData;
 
 public class ValidateTradeSteps extends BaseStep{
 
 	private static IRestResponse<ValidateTradeResponse> validateTradeResponse;
-	private Endpoints endpoints;
+	private APIPost endpoints;
 	private static ValidateTradeRequest validateTradeRequest;
 
-	public ValidateTradeSteps(TestContext testContext) {
-		super(testContext);
-	}
-
 	@Given("^Validate Trade Post API$")
-	public void endpointAndPayload() {
+	public void validate_trade_post_api() {
 		endpoints = getEndpoints();
 	}
 
-	@When("^Post request is made$")
+	@When("^I invoke validate trade request with given data$")
 	public void payloadGiven(DataTable payLoad) {
-		validateTradeRequest = APItestData.createValdiateTradeValidRequest(payLoad);
-		validateTradeResponse = endpoints.postValidateTrade(validateTradeRequest);
+		APIPost apiPost = new APIPost();
+		validateTradeRequest = createRequestData.createValidateTradeValidRequest(payLoad);
+		validateTradeResponse = apiPost.postValidateTrade(validateTradeRequest);
 	}
 
-	@Then("^Success response recieved$")
+	@Then("^Success response received$")
 	public void successApiResult() {
 		Assert.assertTrue(validateTradeResponse.isSuccessful());
 		assertStatus("SUCCESS");
@@ -80,5 +75,4 @@ public class ValidateTradeSteps extends BaseStep{
 	public void verifyErrorMessage(String expectedError) {
 		Assert.assertEquals("Expected error message is ", expectedError, validateTradeResponse.getBody().getMessages().get(0));
 	}
-
 }
