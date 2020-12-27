@@ -35,9 +35,15 @@ public class ConfigFileReader {
 		return configReader;
 	}
 
-	public String getBaseUrl() {
-		String baseUrl = properties.getProperty("base_url");
-		if(baseUrl != null) return baseUrl;
-		else throw new RuntimeException("base_Url not specified in the Configuration.properties file.");
+	public String getHost() {
+		String host = properties.getProperty("host");
+		if(host != null) return host;
+		else throw new RuntimeException("host not specified in the Configuration.properties file.");
+	}
+
+	public String getPort() {
+		String port = properties.getProperty("port");
+		if(port != null) return port;
+		else throw new RuntimeException("port not specified in the Configuration.properties file.");
 	}
 }

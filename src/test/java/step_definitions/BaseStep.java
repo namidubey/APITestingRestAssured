@@ -12,6 +12,6 @@ public class BaseStep {
 	}
 
 	public static String getBaseUrl() {
-		return ConfigFileReader.getInstance().getBaseUrl();
+		return ConfigFileReader.getInstance().getHost()+":"+ConfigFileReader.getInstance().getPort();
 	}
 }
