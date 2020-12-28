@@ -14,7 +14,6 @@ public class Logs {
 	public static Logs getInstance() {
 		if(logs==null) {
 			logs = new Logs();
-			DOMConfigurator.configure("log4j.xml");
 		}
 		DOMConfigurator.configure("log4j.xml");
 		return logs;
